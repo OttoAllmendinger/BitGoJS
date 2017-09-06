@@ -344,7 +344,7 @@ const BitGo = function(params) {
       req.verifyResponse = function(response) {
         var bitgo = self;
 
-        if (!req.isV2Authenticated || !req.authenticationToken) {
+        if (true || !req.isV2Authenticated || !req.authenticationToken) {
           return response;
         }
 
