@@ -137,9 +137,9 @@ describe('V2 Wallets:', function() {
 
         res.wallet.should.have.property('_permissions');
         res.wallet._permissions.length.should.equal(3);
-        res.wallet._permissions.should.include('admin');
-        res.wallet._permissions.should.include('view');
-        res.wallet._permissions.should.include('spend');
+        res.wallet._permissions.should.containEql('admin');
+        res.wallet._permissions.should.containEql('view');
+        res.wallet._permissions.should.containEql('spend');
         return res.wallet.remove();
       })
       .then(function(removal) {
