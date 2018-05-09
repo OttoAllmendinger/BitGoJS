@@ -92,31 +92,21 @@ describe('V2 Wallets:', function() {
     const label = 'v2 wallet';
 
     it('arguments', co(function *() {
-      let error;
-
-      error = yield wallets.generateWallet();
-      should.exist(error);
-
-      error = yield wallets.generateWallet('invalid');
-      should.exist(error);
-
-      error = yield wallets.generateWallet({}, 0);
-      should.exist(error);
-
-      error = yield wallets.generateWallet({
+      yield wallets.generateWallet().should.be.rejected();
+      yield wallets.generateWallet('invalid').should.be.rejected();
+      yield wallets.generateWallet({}, 0).should.be.rejected();
+      yield wallets.generateWallet({
         passphrase: passphrase,
         label: label,
         backupXpub: 'xpub',
         backupXpubProvider: 'krs'
-      });
-      should.exist(error);
+      }).should.be.rejected();
 
-      error = yield wallets.generateWallet({
+      yield wallets.generateWallet({
         passphrase: passphrase,
         label: label,
         disableTransactionNotifications: 'blah'
-      });
-      should.exist(error);
+      }).should.be.rejected();
     }));
 
     it('should make wallet with client-generated user and backup key', function() {
@@ -476,12 +466,12 @@ describe('V2 Wallets:', function() {
       result.should.have.property('spendableBalanceString');
 
       // verify property types
-      result.balance.should.be.a.Number;
-      result.confirmedBalance.should.be.a.Number;
-      result.spendableBalance.should.be.a.Number;
-      result.balanceString.should.be.a.String;
-      result.confirmedBalanceString.should.be.a.String;
-      result.spendableBalanceString.should.be.a.String;
+      result.balance.should.be.a.Number();
+      result.confirmedBalance.should.be.a.Number();
+      result.spendableBalance.should.be.a.Number();
+      result.balanceString.should.be.a.String();
+      result.confirmedBalanceString.should.be.a.String();
+      result.spendableBalanceString.should.be.a.String();
 
       // make sure balances match up with the known balance
       result.balance.should.equal(TestV2BitGo.TEST_KNOWN_BALANCE);
