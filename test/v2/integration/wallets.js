@@ -94,16 +94,16 @@ describe('V2 Wallets:', function() {
     it('arguments', co(function *() {
       let error;
 
-      error = wallets.generateWallet();
+      error = yield wallets.generateWallet();
       should.exist(error);
 
-      error = wallets.generateWallet('invalid');
+      error = yield wallets.generateWallet('invalid');
       should.exist(error);
 
-      error = wallets.generateWallet({}, 0);
+      error = yield wallets.generateWallet({}, 0);
       should.exist(error);
 
-      error = wallets.generateWallet({
+      error = yield wallets.generateWallet({
         passphrase: passphrase,
         label: label,
         backupXpub: 'xpub',
@@ -111,7 +111,7 @@ describe('V2 Wallets:', function() {
       });
       should.exist(error);
 
-      error = wallets.generateWallet({
+      error = yield wallets.generateWallet({
         passphrase: passphrase,
         label: label,
         disableTransactionNotifications: 'blah'
